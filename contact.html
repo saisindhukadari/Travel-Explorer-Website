@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - Aesthetic Travel</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  background: #0b0f1a;
+  color: #fff;
+}
+
+/* Left Panel */
+.left-panel {
+  width: 65%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 40px 30px;
+  background: linear-gradient(135deg, #111827, #1f2937);
+  overflow: hidden;
+}
+
+.left-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 0;
+}
+
+.left-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.left-panel h1 { font-size: 2.2rem; margin-bottom: 10px; color: #3b82f6; }
+.left-panel p { margin-bottom: 20px; color: #aaa; font-size: 1rem; }
+
+.back-btn {
+    padding: 6px 12px;       /* smaller padding */
+    font-size: 14px;         /* smaller text */
+    border-radius: 6px;      /* slightly smaller corners */
+    background: linear-gradient(45deg, #146eb4, #0e4d82);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    box-shadow: 0 0 4px rgba(20,110,180,0.3), 0 0 8px rgba(14,77,130,0.3); /* reduced glow */
+  }
+
+  .back-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(20,110,180,0.5), 0 0 12px rgba(14,77,130,0.5);
+  }
+
+/* Form Styling */
+form {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+form input, form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #3b82f6;
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+}
+form input::placeholder, form textarea::placeholder {
+  color: #bbb;
+}
+form input:focus, form textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 8px #3b82f6;
+}
+form button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+form button:hover { transform: scale(1.05); box-shadow: 0 0 10px #3b82f6; }
+
+/* Google Map */
+.map-container {
+  width: 100%;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  margin-top: 10px;
+}
+
+/* Right Panel */
+.right-panel {
+  width: 35%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #000; /* fallback black */
+}
+
+.right-panel::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80') no-repeat center center/cover;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.right-panel:hover::before {
+  opacity: 0.8;
+  filter: brightness(1.3) saturate(1.4) blur(0.5px);
+}
+.right-panel .quote {
+  position: relative;
+  color: #3b82f6;
+  font-size: 1.4rem;
+  max-width: 75%;
+  text-align: center;
+  z-index: 2;
+  line-height: 1.6;
+  font-style: italic;
+  text-shadow: 0 0 12px rgba(59,130,246,0.8);
+  animation: fadeIn 2s ease forwards, glow 2.5s ease-in-out infinite alternate;
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(20px);} to { opacity:1; transform:translateY(0);} }
+@keyframes glow { from { text-shadow:0 0 8px #3b82f6,0 0 16px #78f0ff;} to { text-shadow:0 0 18px #3b82f6,0 0 30px #78f0ff;} }
+
+</style>
+</head>
+<body>
+
+<div class="left-panel">
+  <button class="back-btn" onclick="window.location.href='index.html'">← Back</button>
+  <h1>Contact Us</h1>
+  <p>Have questions or suggestions? Reach out to us using the form below.</p>
+
+  <form id="contactForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="Your name" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Your email" required>
+
+    <label for="message">Message</label>
+    <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  <!-- Google Map -->
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9996102069425!2d2.292292315674088!3d48.85837397928786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fdf354d9b0f%3A0xcee7e2af3f0c0e93!2sEiffel%20Tower!5e0!3m2!1sen!2sfr!4v1699999999999!5m2!1sen!2sfr"
+      width="100%"
+      height="100%"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+
+<div class="right-panel">
+  <div class="quote">"Wander through the glow of your dreams."</div>
+</div>
+
+<script>
+const travelQuotes = [
+  "Travel is the only thing you buy that makes you richer.",
+  "The world is a book, and those who do not travel read only one page.",
+  "Not all those who wander are lost.",
+  "Life is short and the world is wide.",
+  "Adventure awaits—go find it!",
+  "Collect moments, not things.",
+  "Travel far enough, you meet yourself.",
+  "Wherever you go becomes a part of you somehow.",
+  "To travel is to live.",
+  "Escape the ordinary and embrace the extraordinary."
+];
+
+const quoteElement = document.querySelector('.right-panel .quote');
+let quoteIndex = 0;
+function showNextQuote() {
+  quoteElement.style.opacity = 0;
+  setTimeout(() => {
+    quoteElement.textContent = `"${travelQuotes[quoteIndex]}"`;
+    quoteElement.style.opacity = 1;
+    quoteIndex = (quoteIndex + 1) % travelQuotes.length;
+  }, 500);
+}
+quoteElement.textContent = `"${travelQuotes[quoteIndex]}"`;
+quoteIndex++;
+setInterval(showNextQuote, 5000);
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('Thank you! Your message has been sent.');
+  this.reset();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logout - Travel Explorer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+  body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0b0f1a; /* black background */
+  }
+
+  .logout-card {
+    position: relative;
+    width: 360px;
+    padding: 40px;
+    border-radius: 16px;
+    background: #111827; /* dark card */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    text-align: center;
+  }
+
+  /* Glowing blue border */
+  .logout-card::before {
+    content: '';
+    position: absolute;
+    top: -3px; left: -3px; right: -3px; bottom: -3px;
+    border-radius: 19px;
+    background: linear-gradient(45deg,#3b82f6,#1d4ed8,#3b82f6,#1d4ed8);
+    z-index: -1;
+    filter: blur(12px);
+    animation: glow 3s linear infinite;
+    background-size: 400% 400%;
+  }
+
+  @keyframes glow {
+    0% {background-position:0 0;}
+    50% {background-position:400% 0;}
+    100% {background-position:0 0;}
+  }
+
+  .logout-card h2 {
+    margin-bottom: 16px;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .logout-card p {
+    font-size: 15px;
+    color: #cbd5e1;
+    margin-bottom: 24px;
+  }
+
+  .logout-card button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg,#3b82f6,#1d4ed8);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+    box-shadow: 0 0 3px rgba(59,130,246,0.5), 0 0 6px rgba(29,78,216,0.5);
+  }
+
+  .logout-card button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 8px rgba(59,130,246,0.8), 0 0 12px rgba(29,78,216,0.8);
+  }
+</style>
+</head>
+<body>
+
+<div class="logout-card">
+  <h2>Logout</h2>
+  <p>Are you sure you want to logout from Travel Explorer?</p>
+  <button onclick="handleLogout()">Logout</button>
+</div>
+
+<script>
+function handleLogout() {
+  // Clear logged-in user data
+  localStorage.removeItem('currentUser');
+  localStorage.setItem('isLoggedIn', 'false');
+  alert("You have been logged out successfully!");
+  // Redirect to login page
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

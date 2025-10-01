@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment - Travel Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000; /* Black background */
+      margin: 0;
+      padding: 20px;
+      color: #fff; /* White text */
+    }
+
+    .payment-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #1a1a1a; /* Darker black background for container */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #3ba0ff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .back-button:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      color: #3ba0ff; /* Blue heading */
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      border: 1px solid #444;
+      border-radius: 6px;
+      background-color: #222;
+      color: #fff;
+    }
+
+    input::placeholder {
+      color: #888;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #288ae7;
+      color: white;
+      border: none;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2d8ce0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="payment-container">
+    <a href="index.html" class="back-button"><button>&larr;Back</button></b></a>
+    <h2>Secure Payment</h2>
+    <form>
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="card">Card Number</label>
+      <input type="text" id="card" name="card" placeholder="xxxx-xxxx-xxxx-xxxx" required>
+
+      <label for="expiry">Expiry Date</label>
+      <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+
+      <label for="cvv">CVV</label>
+      <input type="text" id="cvv" name="cvv" required>
+
+      <button type="submit">Pay Now</button>
+    </form>
+  </div>
+
+  <script>
+    document.querySelector("form").addEventListener("submit", function(e) {
+      e.preventDefault(); // Prevent actual form submission
+
+      // Simulate payment processing
+      setTimeout(() => {
+        window.location.href = "thankyou.html"; // Redirect to thank you page
+      }, 1000); // Delay to simulate processing
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Trip - Travel Explorer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background: #0b0f1a;
+  color: #fff;
+}
+
+.back-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  background: linear-gradient(45deg, #146eb4, #0e4d82);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 0 4px rgba(20,110,180,0.3), 0 0 8px rgba(14,77,130,0.3);
+  transition: 0.3s;
+}
+.back-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(20,110,180,0.6), 0 0 12px rgba(14,77,130,0.6);
+}
+
+/* Split container */
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Left Panel */
+.left-panel {
+  width: 50%;
+  background: linear-gradient(160deg, #0b1b33, #000000);
+  padding: 60px 40px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.left-panel h2 {
+  margin-bottom: 20px;
+  color: #ffffffb7;
+}
+
+.booking-form label {
+  display: block;
+  margin: 12px 0 6px;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(20,110,180,0.15);
+  color: #ffffff;
+  font-size: 16px;
+  outline: none;
+}
+
+.booking-form input::placeholder,
+.booking-form textarea::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.booking-form button {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #146eb4, #0e4d82);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 6px rgba(20,110,180,0.4), 0 0 12px rgba(14,77,130,0.4);
+}
+
+.booking-form button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(20,110,180,0.6), 0 0 15px rgba(14,77,130,0.6);
+}
+
+.booking-form select option {
+  color: #000;  /* dropdown options text (black) */
+  background: #fff; /* dropdown background */
+}
+
+
+/* Info Cards */
+.info-card {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(20,110,180,0.2);
+  color: #fff;
+}
+
+/* Right Panel */
+.right-panel {
+  width: 50%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.right-panel::after {
+  content: "";
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: linear-gradient(135deg, rgba(20,110,180,0.5), rgba(0,0,0,0.6));
+}
+
+.quote {
+  position: relative;
+  z-index: 2;
+  color: #7a17f4;
+  font-size: 1.5rem;
+  max-width: 300px;
+  text-align: center;
+  line-height: 1.4;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.6);
+  font-weight: 600;
+}
+
+@media(max-width:900px){
+  .container { flex-direction: column; }
+  .left-panel, .right-panel { width: 100%; height: 50%; }
+  .quote { font-size: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<button class="back-btn">← Back</button>
+
+<div class="container">
+  <div class="left-panel">
+    <h2>Book Your Trip</h2>
+    <form class="booking-form" id="bookingForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Your full name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Your email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="Your phone number" required>
+
+      <label for="destination">Destination</label>
+      <select id="destination" required>
+        <option value="">Select Destination</option>
+      </select>
+
+      <div id="destinationFeatures" class="info-card"></div>
+      <div id="destinationPrice" class="info-card"></div>
+      <div id="destinationSummary" class="info-card"></div>
+
+      <label for="dates">Travel Dates</label>
+      <input type="text" id="dates" placeholder="e.g., 10 Oct - 15 Oct" required>
+
+      <label for="notes">Additional Notes</label>
+      <textarea id="notes" placeholder="Any special requests or notes"></textarea>
+
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+
+  <div class="right-panel">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1280&q=80" alt="Travel">
+    <div class="quote">“Adventure awaits—pack your bags and explore!”</div>
+  </div>
+</div>
+
+<script>
+// Populate destinations
+const destinations = [
+  {name:"Tokyo", country:"Japan", nights:"4N/5D", price:"₹45,000", features:["5 Star Hotel","Guided City Tour","Airport Pickup"]},
+  {name:"Paris", country:"France", nights:"5N/6D", price:"₹60,000", features:["Luxury Stay","Eiffel Tower Visit","Seine River Cruise"]},
+  {name:"Hyderabad", country:"India", nights:"3N/4D", price:"₹15,000", features:["4 Star Hotel","Charminar & Golconda Tour","Food Walk"]},
+  {name:"London", country:"UK", nights:"6N/7D", price:"₹70,000", features:["Hotel Stay","London Eye Pass","City Sightseeing"]},
+  {name:"New York", country:"USA", nights:"5N/6D", price:"₹80,000", features:["Times Square Tour","Statue of Liberty","Central Park Walk"]},
+  {name:"Dubai", country:"UAE", nights:"4N/5D", price:"₹40,000", features:["Burj Khalifa Ticket","Desert Safari","Luxury Stay"]},
+  {name:"Rome", country:"Italy", nights:"4N/5D", price:"₹50,000", features:["Colosseum Tour","Vatican Entry","Hotel Stay"]},
+  {name:"Singapore", country:"Singapore", nights:"3N/4D", price:"₹35,000", features:["Sentosa Island","Marina Bay Sands","Hotel Stay"]},
+  {name:"Istanbul", country:"Turkey", nights:"4N/5D", price:"₹42,000", features:["Blue Mosque Visit","Bosporus Cruise","Luxury Hotel"]},
+  {name:"Kyoto", country:"Japan", nights:"3N/4D", price:"₹38,000", features:["Temple Tour","Geisha District Walk","Ryokan Stay"]},
+  {name:"Venice", country:"Italy", nights:"4N/5D", price:"₹55,000", features:["Gondola Ride","St. Mark’s Square","Canal View Hotel"]},
+  {name:"Santorini", country:"Greece", nights:"4N/5D", price:"₹58,000", features:["Beach Resort Stay","Sunset View Tour","Wine Tasting"]},
+  {name:"Bali", country:"Indonesia", nights:"5N/6D", price:"₹40,000", features:["Beach Villa","Temple Tour","Adventure Activities"]},
+  {name:"Machu Picchu", country:"Peru", nights:"6N/7D", price:"₹90,000", features:["Mountain Trek","Historic Ruins Tour","Hotel Stay"]},
+  {name:"Patagonia", country:"Argentina/Chile", nights:"7N/8D", price:"₹1,20,000", features:["Glacier Trek","National Park Tour","Luxury Lodge"]},
+  {name:"Iceland", country:"Iceland", nights:"5N/6D", price:"₹95,000", features:["Northern Lights Tour","Blue Lagoon","4 Star Hotel"]},
+  {name:"Petra", country:"Jordan", nights:"3N/4D", price:"₹48,000", features:["Petra Entry","Guided Tour","Desert Camp Stay"]},
+  {name:"Great Barrier Reef", country:"Australia", nights:"5N/6D", price:"₹85,000", features:["Snorkeling Tour","Island Cruise","Resort Stay"]},
+  {name:"Taj Mahal", country:"India", nights:"2N/3D", price:"₹12,000", features:["Agra Fort Tour","Guided Taj Visit","Hotel Stay"]},
+  {name:"Barcelona", country:"Spain", nights:"4N/5D", price:"₹52,000", features:["Sagrada Familia Tour","Tapas Experience","Hotel Stay"]},
+  {name:"Rio de Janeiro", country:"Brazil", nights:"5N/6D", price:"₹70,000", features:["Christ the Redeemer","Copacabana Beach","Hotel Stay"]},
+  {name:"Cape Town", country:"South Africa", nights:"5N/6D", price:"₹65,000", features:["Table Mountain","Cape Point Tour","Resort Stay"]},
+  {name:"Seoul", country:"South Korea", nights:"4N/5D", price:"₹48,000", features:["Gyeongbokgung Palace","K-Pop Street","Luxury Stay"]},
+  {name:"Bangkok", country:"Thailand", nights:"3N/4D", price:"₹25,000", features:["Grand Palace","Street Food Tour","Hotel Stay"]},
+  {name:"Lisbon", country:"Portugal", nights:"4N/5D", price:"₹45,000", features:["Belém Tower Visit","Fado Music Night","City Tram Tour"]}
+];
+
+const destinationSelect = document.getElementById('destination');
+const destinationFeaturesDiv = document.getElementById('destinationFeatures');
+const destinationPriceDiv = document.getElementById('destinationPrice');
+const destinationSummaryDiv = document.getElementById('destinationSummary');
+
+// Populate dropdown
+destinations.forEach(dest => {
+  const option = document.createElement('option');
+  option.value = dest.name;
+  option.textContent = `${dest.name}, ${dest.country} (${dest.nights}) - ${dest.price}`;
+  destinationSelect.appendChild(option);
+});
+
+// Update info
+destinationSelect.addEventListener('change', () => {
+  const selected = destinations.find(d => d.name === destinationSelect.value);
+  if(selected){
+    destinationFeaturesDiv.innerHTML = `<strong>Features:</strong> ${selected.features.join(', ')}`;
+    destinationPriceDiv.innerHTML = `💰 Price per person: ${selected.price}`;
+    destinationSummaryDiv.innerHTML = `<strong>Destination:</strong> ${selected.name}, ${selected.country}<br><strong>Nights:</strong> ${selected.nights}<br><strong>Features:</strong> ${selected.features.join(', ')}<br><strong>Price:</strong> ${selected.price}`;
+  } else {
+    destinationFeaturesDiv.innerHTML = '';
+    destinationPriceDiv.innerHTML = '';
+    destinationSummaryDiv.innerHTML = '';
+  }
+});
+
+// Booking submission
+document.getElementById('bookingForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const selected = destinations.find(d => d.name === destinationSelect.value);
+  if(!selected) return alert("Select a valid destination");
+
+  const booking = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    destination: selected.name,
+    dates: document.getElementById('dates').value,
+    notes: document.getElementById('notes').value,
+    price: selected.price
+  };
+
+  const bookings = JSON.parse(localStorage.getItem('bookings')||'[]');
+  bookings.push(booking);
+  localStorage.setItem('bookings', JSON.stringify(bookings));
+
+  alert(`Booking confirmed for ${selected.name}!`);
+  this.reset();
+  destinationFeaturesDiv.innerHTML = '';
+  destinationPriceDiv.innerHTML = '';
+  destinationSummaryDiv.innerHTML = '';
+});
+
+// Back button
+document.querySelector('.back-btn').addEventListener('click', () => {
+  if(document.referrer) window.history.back();
+  else window.location.href='index.html';
+});
+</script>
+</body>
+</html>
